@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import useAuth from "../../hook/useAuth";
-import { getBookings } from "../../api/booking";
+import { getHostBookings } from "../../api/booking";
 import TableRow from "../../components/DashBoard/TableRow";
 import EmptyState from "../../components/Shared/EmptyState";
 
-const MyBookings = () => {
+const ManageBookings = () => {
   const [bookings, setBookings] = useState([]);
   const { user } = useAuth();
   const fetchBookings = () => {
-    getBookings(user?.email).then((data) => {
+    getHostBookings(user?.email).then((data) => {
       setBookings(data);
     });
   };
@@ -80,13 +80,13 @@ const MyBookings = () => {
         </div>
       ) : (
         <EmptyState
-          message={"You Did Not book any room yet!"}
+          message={"No Booking Data Available"}
           address={"/"}
-          label={"Browse Rooms"}
+          label={"Go Back"}
         />
       )}
     </>
   );
 };
 
-export default MyBookings;
+export default ManageBookings;
